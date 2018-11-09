@@ -16,4 +16,8 @@ a batch file is necessary [`run_all.bat`](./run_all.bat)
 This file submits for each folder a job. These jobs are queued and run as soon as there is sufficient space on the cluster. This leads to an operation that is as fast as possible (maybe not ideal under regular cluster use; in urgent situations works well; can be limited by the number of subfolders that are processed).
 
 
+## Plain HGS
+
+[`submit_hgs.sh`](submit_hgs.sh) is a plain batch file that submits an HydroGeoSphere run.
+
 ## Write a Loop in a Batch File
