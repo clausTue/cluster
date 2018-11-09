@@ -5,10 +5,10 @@
 #PBS -q esd1
 #PBS -M Simone.Vogel@student.uni-tuebingen.de
 
-# load all the necessary modules
+# load python module (so that python 3 is loaded)
 module load devel/anaconda3/4.2.0
 
-
+# execute python script
 python /sfs/8/zxmra44/Cluster/submitMany.py
 
 
