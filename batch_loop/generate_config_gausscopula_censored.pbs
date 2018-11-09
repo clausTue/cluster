@@ -1,0 +1,183 @@
+#!/bin/bash
+echo 'remove old config files'
+rm ./config.ini
+sleep 1
+
+for number in {1..22}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    rm ./$CONFIG
+    sleep 1
+done
+
+echo 'generate new files'
+#dpil flowmeter mix
+DATASET=$1
+#V H
+DIRECTION=$2
+MAX_DIST=$3
+ID=$4
+
+cp ./config.ini.bak ./config.ini
+sed -i -- 's/case_id=0/case_id=modelfit/g' config.ini
+sed -i -- 's/dataset=0/dataset='$DATASET'/g' config.ini
+sed -i -- 's/direction=0/direction='$DIRECTION'/g' config.ini
+sed -i -- 's/max_distance=0/max_distance='$MAX_DIST'/g' config.ini
+sed -i -- 's/id=0/id='$ID'/g' config.ini
+sed -i -- 's/solver=0/solver=differential_evolution/g' config.ini
+sed -i -- 's/censored=0/censored=1/g' config.ini
+sed -i -- 's/m=1.0/m=6.0/g' config.ini
+
+
+for number in {1..2}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=88.0/g' ./$CONFIG
+    sed -i -- 's/upper_threshold=0.0/upper_threshold=2.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {3..4}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=86.0/g' ./$CONFIG
+    sed -i -- 's/upper_threshold=0.0/upper_threshold=4.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {5..6}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=84.0/g' ./$CONFIG
+    sed -i -- 's/upper_threshold=0.0/upper_threshold=6.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {7..8}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=82.0/g' ./$CONFIG
+     sed -i -- 's/upper_threshold=0.0/upper_threshold=8.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {9..10}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=80.0/g' ./$CONFIG
+    sed -i -- 's/upper_threshold=0.0/upper_threshold=10.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {11..12}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+    sed -i -- 's/lower_threshold=100.0/lower_threshold=98.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=12.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {13..14}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+    sed -i -- 's/lower_threshold=100.0/lower_threshold=96.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=14.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {15..16}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+    sed -i -- 's/lower_threshold=100.0/lower_threshold=94.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=16.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {17..18}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+    sed -i -- 's/lower_threshold=100.0/lower_threshold=92.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=18.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {19..20}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+    sed -i -- 's/lower_threshold=100.0/lower_threshold=90.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=20.0/g' ./$CONFIG
+    sleep 5
+done
+
+for number in {21..22}
+do
+    CONFIG='config.ini'
+    CONFIG=$CONFIG$number
+
+    echo "$CONFIG"
+    # qsub -q esd1 -l nodes=1:ppn=1:esd1 batch_test.pbs $CONFIG
+    cp ./config.ini ./$CONFIG
+#    sed -i -- 's/lower_threshold=100.0/lower_threshold=90.0/g' ./$CONFIG
+#    sed -i -- 's/upper_threshold=0.0/upper_threshold=10.0/g' ./$CONFIG
+    sed -i -- 's/censored=1/censored=0/g' config.ini
+    sleep 5
+done
+
+
+echo 'replace initial guesses'
+
+
+exit 0

@@ -1,0 +1,41 @@
+#!/bin/bash
+cd $HOME
+cd $HOME/config
+
+#dpil flowmeter mix
+#V H
+
+############################################
+# DPIL gauss censored
+#cd $HOME/code/config
+#./generate_config_gausscopula_censored.pbs dpil H 0.0 071020171
+#cd $HOME
+#./batch_loop_gauss_censored.pbs
+
+#sleep 300
+
+#cd $HOME/code/config
+#./generate_config_gausscopula_censored.pbs dpil V 0.0 071020172
+#cd $HOME
+#./batch_loop_gauss_censored.pbs
+
+#sleep 300
+
+###########################################
+# FLOWMETER gauss censored
+#cd $HOME/code/config
+#./generate_config_gausscopula_censored.pbs flowmeter H 0.0 071020171
+#cd $HOME
+#./batch_loop_gauss_censored.pbs
+
+#sleep 300
+
+cd $HOME/config
+./generate_config_gausscopula_censored.pbs flowmeter V 0.0 27092018
+#./generate_config_gausscopula_censored.pbs dpil V 0.0 25092018
+
+cd $HOME
+./batch_loop_gauss_censored.pbs
+
+#sleep 300
+

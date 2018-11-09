@@ -21,3 +21,20 @@ This file submits for each folder a job. These jobs are queued and run as soon a
 [`submit_hgs.sh`](./plain_hgs/submit_hgs.sh) is a plain batch file that submits an HydroGeoSphere run.
 
 ## Write a Loop in a Batch File
+
+This is a basic way to write a loop in sh files:
+
+    #!/bin/bash
+    for number in {1..22}
+    do
+        CONFIG='config.ini'
+        CONFIG=$CONFIG$number
+
+        echo "$CONFIG"
+    #    cat ./config/$CONFIG
+        qsub -q esd1 -l nodes=1:ppn=1:esd1 model_fit.pbs -F $CONFIG
+        # ./batch_test.pbs $CONFIG
+        sleep 15
+    done
+    
+This folder [`batch_loop`](./batch_loop/) contains more examples

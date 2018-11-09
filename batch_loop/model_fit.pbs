@@ -1,0 +1,45 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1:esd1
+#PBS -l walltime=1000:00:00
+#PBS -l mem=10240MB
+#PBS -N cendpil
+
+# modify $MODULEPATH for the mkl module
+export MODULEPATH=/opt/bwhpc/tu/modulefiles:$MODULEPATH
+
+# load required modules
+module purge
+module load devel/anaconda3/4.2.0
+module list
+
+# copy code and date. to prevent the influence of the config file. the config file should be
+# copied at first
+CONFIG=$1
+echo 'confirm config file'
+echo $CONFIG
+
+cd $PBS_O_WORKDIR
+export PYTHONPATH="$PYTHONPATH":$PBS_O_WORKDIR
+
+cp $HOME/config/$CONFIG $TMPDIR/config.ini
+cp -r $HOME/scripts/* $TMPDIR/
+cd $TMPDIR/
+mkdir ./result
+cat $TMPDIR/config.ini
+cat $TMPDIR/config.ini > ./result/config.ini
+
+# Applikation muss im Suchpfad vorhanden sein
+python $TMPDIR/sc_scripts/cluster_dpil.py
+
+# evtl. komprimieren der Ergebnisdateien
+# tar cvfz ergebnis.tgz $TMPDIR/result/*
+ls $TMPDIR/result/
+
+mv -f $TMPDIR/result/* $PBS_O_WORKDIR/result/
+# ggf. warten, dass alle Daten kopiert wurden
+wait
+
+cd $PBS_O_WORKDIR/
+# rmdir $TMPDIR/
+rm -rf $TMPDIR/
+
