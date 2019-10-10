@@ -1,0 +1,10 @@
+!material
+bo_material
+
+    porosity
+    0.4
+
+    specific storage
+    0.2e-7
+
+END

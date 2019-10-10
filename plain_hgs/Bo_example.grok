@@ -1,0 +1,157 @@
+!--------------------------  Problem description
+2019
+Bo_example
+end title
+!--------------------------  Grid generation
+generate uniform blocks
+100.000000 100 	     ! Domain length and number of blocks in X
+10.000000 10		       ! Domain length and number of blocks in Y
+10.000000 10		         ! Domain length and number of blocks in Z
+end grid definition
+!--------------------------  General simulation parameters
+Finite difference mode
+!finite differenzen methode wird benutzt(anstelle finite elemente methode - default)
+Control volume
+units: Kilogram-metre-second
+!Transient flow
+do transport
+!echo to output
+!--------------------------  Porous media properties
+use domain type
+porous media
+
+properties file
+Bo_example.mprops
+
+clear chosen zones
+choose zone number
+1
+read properties
+bo_material
+
+clear chosen elements
+choose elements all
+Read elemental k from file
+kkk.dat
+clear chosen elements
+
+!=======================================
+!==============  F L O W  ==============
+!=======================================
+!----------- INITIAL FLOW CONDITIONS -----------------------------------------------------------
+clear chosen nodes
+choose nodes all
+initial head
+10.0
+
+!----------- BC --------------------------------------------------------------------------------
+!----------- BC am Rand des Gebietes (1.TYP / DIRICHLET)----------------------------------------
+clear chosen nodes
+choose nodes x plane
+0.000000             		! xk-Koordinate der Ebene
+1.0e-5           		! Distanz-Kriterium (in diesem Abstand werden Punkte ebenfalls beruecksichtigt)
+
+! --------------- BC left hand side
+clear chosen nodes
+choose nodes x plane
+0.0
+1.0e-5
+
+create node set
+inflow
+
+echo on
+
+boundary condition
+    type
+    head
+
+    node set
+    inflow
+
+    time value table
+    0.0 10
+    end
+    
+end ! new specified head
+
+
+
+
+! --------------- BC right hand side
+clear chosen nodes
+choose nodes x plane
+100
+1.0e-5
+
+create node set
+outflow
+
+echo on
+
+boundary condition
+    type
+    head
+
+    node set
+    outflow
+
+    time value table
+    0.0 9.0
+    end
+    
+end ! new specified headspecified head
+
+
+!===============================================
+!============== T R A N S P O R T ==============
+!===============================================
+
+
+Clear chosen nodes
+
+Solute
+name
+conservative tracer
+free-solution diffusion coefficient
+1.000000e-10
+End Solute
+
+!!!!!!!!!!!! Konzentrationszugabe !!!!!!!!!!!!!
+Clear chosen nodes
+Choose nodes horizontal circle
+3 5 5		! x,y,z
+0.1  						! radius
+1.1  				! vert. tol.
+1.1				    ! horiz. tol.
+
+Specified concentration
+1
+0.0, 10.0, 1.0
+
+
+
+Initial concentration
+0.0
+!!!!!!!!!!!! Konzentrationszugabe !!!!!!!!!!!!!
+
+Clear chosen nodes
+
+Upstream weighting of velocities
+0 0 0
+!0 = no upstream; 1 = fully upstream; x y z direction
+
+Transport time weighting
+0.5
+!0 = explicit; 0.5 = Crank Nicholson; 1 = fully implicit
+
+
+
+
+output times
+1e1
+1e5
+1e9
+end
+    
+
